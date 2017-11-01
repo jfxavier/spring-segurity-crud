@@ -1,0 +1,74 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet"
+	href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+	integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+	crossorigin="anonymous" />
+
+<link rel="stylesheet" type="text/css" media="all"
+	href="../static/css/menu.css" th:href="@{/css/menu.css}" />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+	th:src="@{/js/jquery-3.2.1.min.js}"></script>
+
+<style type="text/css">
+.pure-u-1 {
+	padding: 5;
+}
+.pure{
+margin:5;
+padding:5;
+}
+</style>
+
+</head>
+<body>
+
+	<div class="pure-g">
+		<div class="pure-u-1-8" id="menu">
+			<div class="pure-u-11-12">
+				<h2>Simples</h2>
+			</div>
+			<div th:replace="fragmentos/menu"></div>
+		</div>
+		<div class="pure-u-3-4" style="padding: 20">
+			<h1>Alterar Senha</h1>
+
+			<form class="pure-form" method="POST" th:object="${view}"
+				th:action="@{/usuario/salvarsenha}">
+
+
+
+				<div class="pure-u-3-4" th:text="${m1}"
+					th:if="${not #strings.isEmpty(m1)}"></div>
+
+				<div class="pure-u-1">
+					<label for="senha">Senha</label> <input type="password"
+						th:field="*{senha}" />
+					<div class="pure" th:text="${m2}"
+						th:if="${not #strings.isEmpty(m2)}"></div>
+				</div>
+				<div class="pure-u-1">
+					<label for="novasenha">Nova</label> <input type="password"
+						th:field="*{nova}" />
+
+				</div>
+				<div class="pure-u-1">
+					<label for="repetida">Repetir</label> <input type="password"
+						id="repetida" th:field="*{repetida}" />
+
+				</div>
+				<div class="pure-u-1">
+					<button type="submit" class="pure-button">Salvar</button>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</body>
+</html>

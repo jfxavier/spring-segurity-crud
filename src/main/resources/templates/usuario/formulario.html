@@ -1,0 +1,106 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet"
+	href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+	integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+	crossorigin="anonymous" />
+
+<link rel="stylesheet" type="text/css" media="all"
+	href="../static/css/menu.css" th:href="@{/css/menu.css}" />
+
+<script src="../static/js/javascript.js" th:src="@{/js/javascript.js}"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+	th:src="@{/js/jquery-3.2.1.min.js}"></script>
+
+<style type="text/css">
+#regras ul li {
+	padding: 5;
+	list-style-type: none;
+}
+
+.pure-u-1 {
+	padding: 5;
+}
+</style>
+
+</head>
+<body>
+	<div class="pure-g">
+		<div class="pure-u-1-8" id="menu">
+			<div class="pure-u-11-12">
+				<h2>Simples</h2>
+			</div>
+			<div th:replace="fragmentos/menu"></div>
+		</div>
+		<div class="pure-u-3-4" style="padding: 20">
+			<h4>Cadastro de Ocorrências</h4>
+
+			<form class="pure-form" method="POST" th:object="${view}"
+				th:action="@{/usuario/salvar}">
+
+				<input type="hidden" id="senha" th:field="*{senha}" /> <input
+					type="hidden" id="id" th:field="*{id}" /> <input type="hidden"
+					id="enabled" th:field="*{enabled}" />
+
+				<div class="pure-u-1">
+					<label for="nome">Nome</label> <input type="text" id="nome"
+						th:field="*{nome}" autofocus="autofocus" />
+				</div>
+
+				<div class="pure-u-1">
+					<label for="login">Login</label> <input type="text" id="login"
+						th:field="*{login}" onblur="checarlogin('#login')" />
+					<div id="result"></div>
+				</div>
+				<div class="pure-u-1">
+					<label for="setor">Setor</label> <select id="setor"
+						th:field="*{setor}">
+						<option value="FC1">FC1</option>
+						<option value="FC2">FC2</option>
+						<option value="TJRS">TJRS</option>
+						<option value="Palácio">Palácio</option>
+						<option value="Tristeza">Tristeza</option>
+						<option value="Restinga">Restinga</option>
+						<option value="4º Distrito">4º Distrito</option>
+						<option value="Alto Petropolis">Alto Petropolis</option>
+						<option value="Partenon">Partenon</option>
+					</select>
+				</div>
+
+				<div class="pure-u-1">
+					<label for="obs">Observação</label>
+					<textarea id="obs" th:field="*{obs}"></textarea>
+				</div>
+
+				<div class="pure-u-1">
+					<label for="permissoes">Permissões</label>
+					<div class="pure-u-1" id="regras">
+						<ul>
+							<li><input type="checkbox" th:checked="*{usuario}"
+								name="usuario" id="usuario" /> <label th:for="usuario"
+								th:text="*{textoRegras[0]}">Heating</label></li>
+							<li><input type="checkbox" th:checked="*{adm}" name="adm" />
+								<label th:for="adm" th:text="*{textoRegras[1]}">Heating</label></li>
+							<li><input type="checkbox" th:checked="*{visitante}"
+								name="visitante" /> <label th:for="visitante"
+								th:text="*{textoRegras[2]}">Heating</label></li>
+						</ul>
+					</div>
+				</div>
+
+
+				<div class="pure-u-1">
+					<button type="submit" class="pure-button" id="salvar">Salvar</button>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+</body>
+</html>

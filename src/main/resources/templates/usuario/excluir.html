@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet"
+	href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+	integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+	crossorigin="anonymous" />
+
+<link rel="stylesheet" type="text/css" media="all"
+	href="../static/css/menu.css" th:href="@{/css/menu.css}" />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+	th:src="@{/js/jquery-3.2.1.min.js}"></script>
+
+
+</head>
+<body>
+	<div class="pure-g">
+		<div class="pure-u-1-8" id="menu">
+			<div class="pure-u-11-12">
+				<h2>Simples</h2>
+			</div>
+			<div th:replace="fragmentos/menu"></div>
+		</div>
+		<div class="pure-u-3-4" style="padding:20">
+			<h4>Excluir?</h4>
+			Confirma a exclusão do usuário <p th:text="${usuario.login}"></p>.
+			<a th:href="@{/usuario/delete/__${usuario.id}__}">Sim</a>
+			<a th:href="@{/usuario/lista}">Não</a>
+		</div>
+	</div>
+
+</body>
+</html>

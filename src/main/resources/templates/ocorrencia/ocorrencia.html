@@ -1,0 +1,153 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet"
+	href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
+	integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+	crossorigin="anonymous" />
+
+<link rel="stylesheet" type="text/css" media="all"
+	href="../static/css/menu.css" th:href="@{/css/menu.css}" />
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+	th:src="@{/js/jquery-3.2.1.min.js}"></script>
+
+<style type="text/css">
+#numero {
+	color: black;
+	background-color: transparent;
+	border: 0px solid;
+	outline: none;
+	box-shadow: none;
+}
+
+#usuario {
+	color: black;
+	background-color: transparent;
+}
+
+#dataRegistro {
+	color: black;
+	background-color: transparent;
+}
+
+#ultimaAlteracao {
+	color: black;
+	background-color: transparent;
+}
+
+#usuarioAlteracao {
+	color: black;
+	background-color: transparent;
+}
+</style>
+
+<title>Lista de Ocorrências</title>
+</head>
+<body>
+
+	<div class="pure-g">
+		<div class="pure-u-1-8" id="menu">
+			<div class="pure-u-11-12">
+				<h2>Simples</h2>
+			</div>
+			<div th:replace="fragmentos/menu"></div>
+		</div>
+		<div class="pure-u-3-4" style="padding: 20">
+			<h4>Cadastro de Ocorrências</h4>
+
+			<form class="pure-form pure-g" th:object="${ocorrenciaView}"
+				th:action="@{/ocorrencia/salvar}" method="POST">
+				<input name="id" id="id" th:field="*{id}" type="hidden" />
+				<div class="pure-u-1-3">
+					<div class="pure-u-1">
+						<label for="numero">Número</label> <input class="pure-u-23-24"
+							type="text" th:field="*{numero}" id="numero" readonly="readonly" />
+					</div>
+					<div class="pure-u-2-5">
+						<label for="data">Data</label> <input class="pure-u-23-24"
+							type="text" th:field="*{data}" id="data" />
+					</div>
+					<div class="pure-u-1-3">
+						<label for="hora">Horário</label> <input class="pure-u-23-24"
+							type="text" th:field="*{hora}" id="hora" />
+					</div>
+					<div class="pure-u-1">
+						<label for="codigo">Código</label> <input class="pure-u-23-24"
+							type="text" th:field="*{codigo}" id="codigo" />
+					</div>
+					<div class="pure-u-1">
+						<label for="local">Local</label> <input class="pure-u-23-24"
+							type="text" th:field="*{local}" id="local" />
+					</div>
+					<div class="pure-u-2-5">
+						<label for="turno">Turno</label> <select class="pure-u-23-24"
+							id="turno" th:field="*{turno}">
+							<option value="Manhã">Manhã</option>
+							<option value="Tarde">Tarde</option>
+							<option value="Noite">Noite</option>
+						</select>
+					</div>
+					<div class="pure-u-7-12">
+						<label for="setor">Setor</label> <select class="pure-u-23-24"
+							id="setor" th:field="*{setor}">
+							<option value=""></option>
+							<option value="FC1">FC1</option>
+							<option value="FC2">FC2</option>
+							<option value="TJRS">TJRS</option>
+							<option value="Palácio">Palácio</option>
+							<option value="Tristeza">Tristeza</option>
+							<option value="Restinga">Restinga</option>
+							<option value="4º Distrito">4º Distrito</option>
+							<option value="Alto Petropolis">Alto Petropolis</option>
+							<option value="Partenon">Partenon</option>
+						</select>
+					</div>
+					<div class="pure-u-1">
+						<label for="guardas">Guardas</label> <input class="pure-u-23-24"
+							type="text" th:field="*{guardas}" id="guardas" />
+					</div>
+
+					<div class="pure-u-2-5">
+						<h4>Registro</h4>
+						<label for="dataRegistro">Data</label> <input class="pure-u-23-24"
+							type="text" th:field="*{dataRegistro}" id="dataRegistro"
+							readonly="readonly" /> <label for="usuario">Usuário</label> <input
+							class="pure-u-23-24" type="text" th:field="*{usuario}"
+							id="usuario" readonly="readonly" />
+					</div>
+					<div class="pure-u-2-5">
+
+						<h4>Últ. Alteração</h4>
+						<label for="ultimaAlteracao">Data</label> <input
+							class="pure-u-23-24" type="text" th:field="*{ultimaAlteracao}"
+							id="ultimaAlteracao" readonly="readonly" /> <label
+							for="usuarioAlteracao">Usuário</label> <input
+							class="pure-u-23-24" type="text" th:field="*{usuarioAlteracao}"
+							id="usuarioAlteracao" readonly="readonly" />
+					</div>
+
+				</div>
+				<div class="pure-u-2-3">
+					<textarea class="pure-input-1"
+						th:classappend="${#fields.hasErrors('informacao')} ?  'has-error has-feedback'"
+						rows="23" id="informacao" th:field="*{informacao}">Histórico detalhado da ocorrência.</textarea>
+					<button class="pure-button pure-u-1-3"
+						style="padding: 10; margin: 10">Extrato</button>
+					<input class="pure-button pure-u-1-3"
+						style="padding: 10; margin: 10" type="submit" value="Salvar" />
+				</div>
+
+
+
+			</form>
+
+		</div>
+	</div>
+
+</body>
+</html>

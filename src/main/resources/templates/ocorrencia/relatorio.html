@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.css}" />
+
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	th:src="@{/bootstrap-3.3.7-dist/js/bootstrap.min.js}"></script>
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+	th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<style type="text/css">
+#text {
+	border: 1px;
+}
+</style>
+
+<title>Extrato da Ocorrência</title>
+
+
+</head>
+<body>
+
+	<img src="http://www.tjrs.jus.br/export/images/tjrs.png"
+		th:src="@{/img/tjrs.png}"></img>
+
+	<br></br>
+	<br></br>
+	<br></br>
+
+	<h4 class="text-center">
+		Ocorrência de Segurança nº <span th:text="${comp}">01/2017</span>
+	</h4>
+	<br></br>
+	<br></br>
+	<br></br>
+	<br></br>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-1 col-md-5">
+				<strong>Data: </strong><span
+					th:text="${#dates.format(ocorrencia.data,'dd/MM/yyyy')}">01/01/2017</span>
+			</div>
+			<div class="col-md-offset-1 col-md-5">
+				<strong>Hora: </strong><span
+					th:text="${#dates.format(ocorrencia.hora,'HH:mm')}">12:34</span>
+			</div>
+			<div class="col-md-offset-1 col-md-5">
+				<strong>Sala: </strong><span th:text="${ocorrencia.sala}">12</span>
+			</div>
+			<div class="col-md-offset-1 col-md-5">
+				<strong>Código: </strong><span th:text="${ocorrencia.codigo}">12
+					- Teste de Inclusão</span>
+			</div>
+			<div class="col-md-offset-1 col-md-5">
+				<strong>Turno: </strong><span th:text="${ocorrencia.turno}">Manhã</span>
+			</div>
+			<div class="col-md-offset-1 col-md-5">
+				<strong>Chefe: </strong><span th:text="${ocorrencia.chefe}">Teste</span>
+			</div>
+		</div>
+	</div>
+	<br></br>
+	<br></br>
+	<br></br>
+	<div class="container">
+		<div class="row">
+			<strong>Registro</strong>
+		</div>
+		<div class="row">
+			<div id="texto">
+				<span th:text="${ocorrencia.informacao}"> O sistema de
+					boletim provisório deverá funcionar durante as greves, e
+					posteriormente é analisado para que possa se tornar uma ferramenta
+					que ocorra de forma efetiva para os trabalhos realizados executados
+					pela Polícia Civil, este novo modelo deverá ter a mesma validade do
+					boletim convencional, e o que deverá mudar é a sua praticidade,
+					evitando as filas, e a perda de tempo de toda a população. Vale
+					citar ainda que a falsa comunicação á polícia constitui em crime
+					com pena de um a seis meses de prisão ou ainda de multa. Em via de
+					regra, o boletim de ocorrência é constituído de diversos campos,
+					principalmente os campos descritivos, com a finalidade de serem
+					relacionados com dados como a qualificação dos envolvidos, bem como
+					os materiais apreendidos, integrantes de equipes policiais entre
+					outros. Os preenchimentos destes campos devem acontecer de forma
+					intuitiva, sem grandes dificuldades, a coisa deverá começar a se
+					complicar no campo histórico de ocorrência onde os policiais devem
+					narrar os fatos, e é neste ponto que você deverá ser o mais preciso
+					possível. Em via de regra, o BO é constituído de diversos campos
+					principalmente os campos descritivos, com a finalidade de serem
+					relacionados aos dados como a qualificação dos envolvidos. Todos os
+					dados que forem lançados em campos parametrizados não precisam ser
+					repetidos no histórico exceto se forem importantes para a narrativa
+					do acontecimento.</span>
+			</div>
+		</div>
+	</div>
+	<br></br>
+	<br></br>
+	<br></br>
+	<div class="col-md-offset-1 col-md-5">
+		<strong>Data do Registro: <span
+			th:text="${ocorrencia.dataRegistro}">01/01/2017</span></strong>
+	</div>
+	<div class="col-md-offset-1 col-md-5">
+		<strong>Guarda: <span th:text="${ocorrencia.guarda}">jxavier</span></strong>
+	</div>
+
+</body>
+</html>
