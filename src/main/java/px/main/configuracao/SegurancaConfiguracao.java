@@ -27,12 +27,21 @@ public class SegurancaConfiguracao extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers("/usuario/alterarsenha").hasRole("USER")
-		.antMatchers("/usuario/salvarsenha").hasRole("USER")
-		.antMatchers("/usuario/**").hasRole("ADM")
-		.antMatchers("/ocorrencia/**").hasRole("USER")
 		
-		.antMatchers("/", "/home").permitAll().antMatchers("/css/**", "/js/**", "/images/**").permitAll().anyRequest().authenticated().and().formLogin().loginPage("/login")
-				.defaultSuccessUrl("/ocorrencia/lista").permitAll().and().logout().permitAll().and().csrf().disable();
+		.antMatchers("/usuario/alterarsenha").hasRole("VISITANTE")
+		.antMatchers("/usuario/salvarsenha").hasRole("VISITANTE")
+		.antMatchers("/usuario/**").hasRole("ADM")
+		.antMatchers("/ocorrencia/**").hasRole("USER")  
+		
+		.antMatchers("/", "/home").permitAll()
+		.antMatchers("/css/**", "/js/**", "/images/**").permitAll()
+		.anyRequest().authenticated()
+		
+		.and().formLogin().loginPage("/login").defaultSuccessUrl("/ocorrencia/lista").permitAll()
+		.and().exceptionHandling().accessDeniedPage("/403")
+				
+				.and().logout().permitAll()
+				
+				.and().csrf().disable();
 	}
 }

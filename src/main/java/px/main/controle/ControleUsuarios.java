@@ -1,5 +1,7 @@
 package px.main.controle;
 
+import java.util.ArrayList;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import px.main.seguranca.modelos.Grupo;
 import px.main.seguranca.modelos.Usuario;
+import px.main.seguranca.modelos.UsuarioRegra;
 import px.main.seguranca.repository.UsuarioRegraRepository;
 import px.main.seguranca.repository.UsuarioRepository;
 import px.main.seguranca.views.Alterarsenha;
@@ -61,10 +65,29 @@ public class ControleUsuarios {
 		}
 		System.out.println(usuario);
 		usuarioRepository.save(usuario);
-		
+
 		ModelAndView model = new ModelAndView("redirect:/usuario/lista");
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso.");
 		return model;
+	}
+
+	@RequestMapping(value = "/gerarADM")
+	public ModelAndView criarADM() {
+
+		if (usuarioRepository.findAll() == null) {
+
+			Usuario usuario = new Usuario(0, "adm", Usuario.MD5("adm"), "Administrador", "", "", true, new ArrayList<UsuarioRegra>(), new ArrayList<Grupo>());
+			usuario.criarADM();
+
+			System.out.println(usuario);
+			usuarioRepository.save(usuario);
+
+			ModelAndView model = new ModelAndView("usuario/adm");
+			model.addObject("usuario", usuario);
+
+			return model;
+		}
+		return lista();
 	}
 
 	@RequestMapping(value = "/salvarsenha", method = RequestMethod.POST)
@@ -113,8 +136,8 @@ public class ControleUsuarios {
 	public ModelAndView qdelete(@PathVariable Integer id) {
 		if (usuarioRepository.findOne(id) != null) {
 			ModelAndView model = new ModelAndView("/usuario/excluir");
-		model.addObject("usuario",usuarioRepository.findOne(id) );
-		return model;
+			model.addObject("usuario", usuarioRepository.findOne(id));
+			return model;
 		}
 		return lista();
 
@@ -140,6 +163,7 @@ public class ControleUsuarios {
 		}
 		return username;
 	}
+
 	@RequestMapping(value = "/existe/{login}", method = RequestMethod.GET)
 	public @ResponseBody String LoginExiste(@PathVariable String login) {
 		Usuario user = usuarioRepository.findByLogin(login);

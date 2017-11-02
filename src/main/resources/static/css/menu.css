@@ -1,10 +1,17 @@
-#menu{
-background-color: #eee;
-padding:10 10 10 10;
+body {
+	margin: 0;
+	padding: 0;
 }
+
+#menu {
+	background-color: #eee;
+	padding: 10 10 10 10;
+}
+
 .vertical-menu {
 	margin-left: -10; /* Set a width if you like */
 }
+
 .vertical-menu a {
 	color: black; /* Black text color */
 	display: block; /* Make the links appear below each other */
@@ -21,25 +28,25 @@ padding:10 10 10 10;
 	/* Add a green color to the "active/current" link */
 	color: white;
 }
+
 ul.pagination {
-    display: inline-block;
-    padding: 0;
-    margin: 0;
+	display: inline-block;
+	padding: 0;
+	margin: 0;
 }
 
 ul.pagination li {
 	display: inline;
-	}
+}
 
 ul.pagination li span {
-    color: black;
-    float: left;
-    padding: 8px 16px;
-    text-decoration: none;
+	color: black;
+	float: left;
+	padding: 8px 16px;
+	text-decoration: none;
 }
-#nav{
-	text-align:center;
+
+#nav {
+	text-align: center;
 	margin: 20 10 10 10;
 }
-
-

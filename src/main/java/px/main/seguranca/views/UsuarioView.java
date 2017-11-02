@@ -33,7 +33,7 @@ public class UsuarioView {
 		textoRegras = new ArrayList<String>();
 		textoRegras.add("Cadastrar e alterar ocorrências.");
 		textoRegras.add("Adicionar e excluir usuarios.");
-		textoRegras.add("Apenas visualizar as ocorrências.");
+		textoRegras.add("Apenas visualizar as ocorrências e Alterar sua senha.");
 
 	}
 

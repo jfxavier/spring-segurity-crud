@@ -17,47 +17,62 @@
 	th:src="@{/js/jquery-3.2.1.min.js}"></script>
 
 <style type="text/css">
-body {
-	margin: 0;
-	background-color: gray;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+.msg {
+	margin: 10;
+	padding: 10;
+	width:200;
+	border-radius: 3px;
 }
 
-#box {
-	background-image: url('../images/login.jpg');
-	width: 400px;
-	height: 300px;
-	padding: 20px;
-	border-radius: 10px;
+.alerta {
+	border: 1px solid #900;
+	background-color: #fdd;
 }
 
-#box form {
-	width: 200;
-	margin: 50 0 0 130;
-	padding: 50;
-}
-#box form input{
-margin:2;
-padding: 5px;
-	border-radius: 10px;
+.ok {
+	border: 1px solid #090;
+	background-color: #dfd;
 }
 </style>
+
 </head>
 <body>
-	<div id="box">
-		<form th:action="@{/login}" method="post">
-			<h2>Simples</h2>
-			<div th:if="${param.error}">Login ou usuário é invalido.</div>
-			<div th:if="${param.logout}">Você saiu com sucesso..</div>
-			<input type="text" id="username" name="username" placeholder="Usuário"
-				autofocus="autofocus" required="required" /><input type="password"
-				id="password" name="password" placeholder="Senha"
-				required="required" /> <input type="submit"
-				value="Entrar" />
-		</form>
+	<div class="pure-g">
+		<div class="pure-u-1-8" id="menu">
+			<div class="pure-u-11-12">
+				<h2>Simples</h2>
+			</div>
+			<div class="vertical-menu"></div>
+		</div>
+		<div class="pure-u-3-4" style="padding: 20">
+			<h1>Login</h1>
+			<h2>Simples - Sistema de Ocorrências para a Guarda</h2>
+			<form th:action="@{/login}" method="post"
+				class="pure-form pure-form-aligned">
+				<fieldset>
+					<div class="pure-controls">
+						<div th:if="${param.error}" class="msg alerta">Login ou usuário
+							é invalido.</div>
+						<div th:if="${param.logout}" class="msg ok">Você saiu
+							com sucesso.</div>
+					</div>
+					<div class="pure-control-group">
+						<label for="username">Usuário: </label> <input type="text"
+							id="username" name="username" placeholder="Usuário"
+							autofocus="autofocus" required="required" />
+					</div>
+					<div class="pure-control-group">
+						<label for="password">Senha: </label> <input type="password"
+							id="password" name="password" placeholder="Senha" />
+					</div>
+					<div class="pure-controls">
+						<button type="submit" class="pure-button pure-button-primary"
+							id="botao">Entrar</button>
+					</div>
+				</fieldset>
+			</form>
+
+		</div>
 	</div>
 </body>
 </html>

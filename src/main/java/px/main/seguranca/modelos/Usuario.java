@@ -291,4 +291,11 @@ public class Usuario {
 		}
 		return "d41d8cd98f00b204e9800998ecf8427e";
 	}
+	public void criarADM() {
+		this.regras.add(new UsuarioRegra("ROLE_USER", this));
+		this.regras.add(new UsuarioRegra("ROLE_ADM", this));
+		this.regras.add(new UsuarioRegra("ROLE_VISITANTE", this));
+	}
+	
+	
 }

@@ -12,10 +12,21 @@
 <link rel="stylesheet" type="text/css" media="all"
 	href="../static/css/menu.css" th:href="@{/css/menu.css}" />
 
+<script src="../static/js/javascript.js" th:src="@{/js/javascript.js}"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
 	th:src="@{/js/jquery-3.2.1.min.js}"></script>
 
+<style type="text/css">
+#regras ul li {
+	padding: 5;
+	list-style-type: none;
+}
+
+.pure-u-1 {
+	padding: 5;
+}
+</style>
 
 </head>
 <body>
@@ -24,19 +35,26 @@
 			<div class="pure-u-11-12">
 				<h2>Simples</h2>
 			</div>
-			<div th:replace="fragmentos/menu"></div>
+			<div class="vertical-menu"></div>
 		</div>
-		<div class="pure-u-3-4" style="padding:20">
-			<h4>Excluir?</h4>
-			Confirma a exclusão do usuário <p th:text="${usuario.login}"></p>.
-			<a th:href="@{/usuario/delete/__${usuario.id}__}">Sim</a>
-			<a th:href="@{/usuario/lista}">Não</a>
+		<div class="pure-u-3-4" style="padding: 20">
+			<h1>Bem Vindo!!!</h1>
+			<h2>Simples - Sistema de Ocorrências para a Guarda</h2>
+			<p>
+				Para o seu primeiro acesso o sistema cria automaticamente o usuario
+				"adm" com senha "adm". É recomendável modifica-la no
+				primeiro acesso.
+			</p>
+<p> </p>
+			<a class="pure-button pure-button-primary" th:href="@{/login}"
+				style="">Acessar</a>
+<p> </p>
+			<p>Bom proveito</p>
+			<p>João Xavier</p>
+
+
+
 		</div>
 	</div>
-
-<!-- spring.datasource.url =jdbc:mysql://node146516-server.jelasticlw.com.br/seg
-spring.datasource.username = seg
-spring.datasource.password = xChVWRUgwnJuq3qE -->
-
 </body>
 </html>

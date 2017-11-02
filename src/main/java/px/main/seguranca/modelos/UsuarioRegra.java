@@ -41,7 +41,7 @@ public class UsuarioRegra {
 		this.usuario = new Usuario();
 		this.regra = regra;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
