@@ -34,7 +34,7 @@ public class ControleOcorrencias {
 
 	@RequestMapping(value = "/lista")
 	public ModelAndView consulta(@PageableDefault(value = REGISTROPORGAGINA) Pageable page) {
-		ModelAndView model = new ModelAndView("/ocorrencia/consulta");
+		ModelAndView model = new ModelAndView("ocorrencia/consulta");
 		model.addObject("view", new ConsultaView());
 		model.addObject("page", page);
 		model.addObject("lista", ocorrenciaRepository.findAll(page));
@@ -43,7 +43,7 @@ public class ControleOcorrencias {
 
 	@RequestMapping(value = "/listar", method = RequestMethod.GET)
 	public ModelAndView consulta(@ModelAttribute("view") ConsultaView view, @PageableDefault(value = REGISTROPORGAGINA) Pageable page) throws ParseException {
-		ModelAndView model = new ModelAndView("/ocorrencia/consulta");
+		ModelAndView model = new ModelAndView("ocorrencia/consulta");
 		page = move(page, view.getPagina());
 		Page<Ocorrencia> list = ocorrenciaRepository.findAll(view.Query(), page);
 		model.addObject("view", view);
@@ -54,7 +54,7 @@ public class ControleOcorrencias {
 
 	@RequestMapping("")
 	public ModelAndView novo(OcorrenciaView ocorrenciaView) {
-		ModelAndView model = new ModelAndView("/ocorrencia/ocorrencia");
+		ModelAndView model = new ModelAndView("ocorrencia/ocorrencia");
 		model.addObject("ocorrenciaView", ocorrenciaView);
 		return model;
 	}
@@ -96,7 +96,7 @@ public class ControleOcorrencias {
 		}
 
 		System.out.println(ocorrencia);
-		ModelAndView model = new ModelAndView("redirect:/ocorrencia/lista");
+		ModelAndView model = new ModelAndView("redirect:ocorrencia/lista");
 		ocorrenciaRepository.save(ocorrencia);
 		System.out.println(ocorrencia);
 		return model;

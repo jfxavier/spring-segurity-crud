@@ -5,11 +5,13 @@ body {
 
 #menu {
 	background-color: #eee;
-	padding: 10 10 10 10;
+	padding: 10;
+	margin: 0;
+	height: 95%;
 }
 
 .vertical-menu {
-	margin-left: -10; /* Set a width if you like */
+	margin: 0;
 }
 
 .vertical-menu a {

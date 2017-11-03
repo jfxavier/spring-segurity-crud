@@ -34,14 +34,14 @@ public class SegurancaConfiguracao extends WebSecurityConfigurerAdapter {
 		.antMatchers("/ocorrencia/**").hasRole("USER")  
 		
 		.antMatchers("/", "/home").permitAll()
-		.antMatchers("/css/**", "/js/**", "/images/**").permitAll()
+		.antMatchers("/css/**", "/js/**", "/images/**","/templates/**").permitAll()
 		.anyRequest().authenticated()
 		
 		.and().formLogin().loginPage("/login").defaultSuccessUrl("/ocorrencia/lista").permitAll()
 		.and().exceptionHandling().accessDeniedPage("/403")
 				
-				.and().logout().permitAll()
+				.and().logout().permitAll();
 				
-				.and().csrf().disable();
+				//.and().csrf().disable();
 	}
 }

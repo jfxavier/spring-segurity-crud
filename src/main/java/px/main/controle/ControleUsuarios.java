@@ -42,7 +42,7 @@ public class ControleUsuarios {
 
 	@RequestMapping("")
 	public ModelAndView novo(UsuarioView view) {
-		ModelAndView model = new ModelAndView("/usuario/formulario");
+		ModelAndView model = new ModelAndView("usuario/formulario");
 		model.addObject("view", view);
 		System.out.println(view);
 		return model;
@@ -66,7 +66,7 @@ public class ControleUsuarios {
 		System.out.println(usuario);
 		usuarioRepository.save(usuario);
 
-		ModelAndView model = new ModelAndView("redirect:/usuario/lista");
+		ModelAndView model = new ModelAndView("redirect:usuario/lista");
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso.");
 		return model;
 	}
@@ -135,7 +135,7 @@ public class ControleUsuarios {
 	@RequestMapping(value = "/qdelete/{id}", method = RequestMethod.GET)
 	public ModelAndView qdelete(@PathVariable Integer id) {
 		if (usuarioRepository.findOne(id) != null) {
-			ModelAndView model = new ModelAndView("/usuario/excluir");
+			ModelAndView model = new ModelAndView("usuario/excluir");
 			model.addObject("usuario", usuarioRepository.findOne(id));
 			return model;
 		}
