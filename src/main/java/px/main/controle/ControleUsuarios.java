@@ -44,7 +44,6 @@ public class ControleUsuarios {
 	public ModelAndView novo(UsuarioView view) {
 		ModelAndView model = new ModelAndView("usuario/formulario");
 		model.addObject("view", view);
-		System.out.println(view);
 		return model;
 	}
 
@@ -61,12 +60,10 @@ public class ControleUsuarios {
 		} else {
 			usuario = new Usuario(view);
 			usuario.setSenha(view.getLogin());
-
 		}
-		System.out.println(usuario);
 		usuarioRepository.save(usuario);
 
-		ModelAndView model = new ModelAndView("redirect:usuario/lista");
+		ModelAndView model = new ModelAndView("redirect:lista");
 		attributes.addFlashAttribute("mensagem", "Usuário salvo com sucesso.");
 		return model;
 	}

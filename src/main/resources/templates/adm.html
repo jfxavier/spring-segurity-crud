@@ -5,56 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <link rel="stylesheet"
-	href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
-	integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" media="all"
-	href="../static/css/menu.css" th:href="@{/css/menu.css}" />
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
 
-<script src="../static/js/javascript.js" th:src="@{/js/javascript.js}"></script>
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
-	th:src="@{/js/jquery-3.2.1.min.js}"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+	crossorigin="anonymous"></script>
 
-<style type="text/css">
-#regras ul li {
-	padding: 5;
-	list-style-type: none;
-}
-
-.pure-u-1 {
-	padding: 5;
-}
-</style>
-
+<title>Primeiro Acesso</title>
 </head>
 <body>
-	<div class="pure-g">
-		<div class="pure-u-1-8" id="menu">
-			<div class="pure-u-11-12">
-				<h2>Simples</h2>
-			</div>
-			<div class="vertical-menu"></div>
-		</div>
-		<div class="pure-u-3-4" style="padding: 20">
-			<h1>Bem Vindo!!!</h1>
-			<h2>Simples - Sistema de Ocorrências para a Guarda</h2>
-			<p>
-				Para o seu primeiro acesso o sistema cria automaticamente o usuario
-				"adm" com senha "adm". É recomendável modifica-la no
-				primeiro acesso.
-			</p>
-<p> </p>
-			<a class="pure-button pure-button-primary" th:href="@{/login}"
-				style="">Acessar</a>
-<p> </p>
-			<p>Bom proveito</p>
-			<p>João Xavier</p>
+
+
+	<div class="vertical-menu"></div>
+
+	<div class="container" style="padding: 20">
+		<h1>Bem Vindo!!!</h1>
+		<h2>Simples - Sistema de Ocorrências para a Guarda</h2>
+		<p>Para o seu primeiro acesso o sistema cria automaticamente o
+			usuario "adm" com senha "adm". É recomendável modifica-la no primeiro
+			acesso.</p>
+		<p></p>
+		<a class="pure-button pure-button-primary" th:href="@{/login}"
+			style="">Acessar</a>
+		<p></p>
+		<p>Bom proveito</p>
+		<p>João Xavier</p>
 
 
 
-		</div>
 	</div>
 </body>
 </html>

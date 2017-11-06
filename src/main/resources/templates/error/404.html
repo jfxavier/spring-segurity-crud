@@ -5,46 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <link rel="stylesheet"
-	href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
-	integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous" />
+	
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
 
-<link rel="stylesheet" type="text/css" media="all"
-	href="../static/css/menu.css" th:href="@{/css/menu.css}" />
-
-<script src="../static/js/javascript.js" th:src="@{/js/javascript.js}"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
-	th:src="@{/js/jquery-3.2.1.min.js}"></script>
-
-<style type="text/css">
-#regras ul li {
-	padding: 5;
-	list-style-type: none;
-}
-
-.pure-u-1 {
-	padding: 5;
-}
-</style>
 
 </head>
 <body>
-	<div class="pure-g">
-		<div class="pure-u-1-8" id="menu">
-			<div class="pure-u-11-12">
-				<h2>Simples</h2>
-			</div>
-			<div class="vertical-menu"></div>
-		</div>
-		<div class="pure-u-3-4" style="padding: 20">
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Simples</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</nav>
+
+		<div class="container" style="padding: 20">
 			<h1>404 - Página não Localizada</h1>
 			<h2>Simples - Sistema de Ocorrências para a Guarda</h2>
 			<p>Página perdida na nuvem reveja a url buscada se o problema
 				persistir entre em contato com a manutenção do sistema.</p>
 			<p>e-mail:joao.fpx@hotmail.com</p>
 			<p>
-				<a href="javascript:window.history.go(-1)">Voltar</a>
+				<a href="javascript:window.history.go(-1)" class="btn btn-primary">Voltar</a>
 			</p>
 			<p></p>
 
@@ -52,6 +42,6 @@
 			<p th:utext="${errorMessage}">Error
 				java.lang.NullPointerException</p>
 		</div>
-	</div>
+
 </body>
 </html>

@@ -1,37 +1,26 @@
-   <html xmlns="http://www.w3.org/1999/xhtml" 
-    xmlns:th="http://www.thymeleaf.org" 
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <link rel="stylesheet"
-	href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
-	integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" media="all"
-	href="../static/css/menu.css" th:href="@{/css/menu.css}" />
-	
-	<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
-	th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
 
-<style>
-#botao {
-	position: relative;
-	top: 15;
-}
-
-.pure-g {
-	padding: 0 0 10 10;
-}
-
-#center {
-	padding: 20;
-}
-</style>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+	crossorigin="anonymous"></script>
 
 <script type="text/javascript">
 	function addPagina(p) {
@@ -44,125 +33,115 @@
 </head>
 <body>
 
-	<div class="pure-g">
-		<div class="pure-u-1-8" id="menu">
-			<div class="pure-u-11-12" id="menut">
-				<h2>Simples</h2>
-			</div>
-			<div th:replace="fragmentos/menu"></div>
+	<div th:replace="fragmentos/menu"></div>
+	<div class="container" style="padding: 20">
 
+		<form th:action="@{/ocorrencia/listar}" method="GET"
+			th:object="${view}">
+
+			<input type="hidden" th:field="*{pagina}" value="1" name="pagina"
+				id="pagina" />
+
+			<h4>Consulta</h4>
+			<div class="row">
+				<div class="form-group col-md-2">
+					<label for="datainicio">1ª Data</label> <input class="form-control"
+						type="text" th:field="*{datainicio}" id="datainicio"
+						name="datainicio" placeholder="dd/mm/yyyy" />
+				</div>
+
+
+				<div class="form-group col-md-2">
+					<label for="datafim">2ª Data</label> <input class="form-control"
+						type="text" th:field="*{datafim}" id="datafim" name="datafim"
+						placeholder="dd/mm/yyyy" />
+				</div>
+
+				<div class="form-group col-md-2">
+					<label for="datainicio">1ª Hora</label> <input class="form-control"
+						type="text" th:field="*{horainicio}" id="horainicio"
+						name="horainicio" placeholder="hh:mm" />
+				</div>
+				<div class="form-group col-md-2">
+					<label for="horafim">2ª Hora</label> <input class="form-control"
+						type="text" th:field="*{horafim}" id="horafim" name="horafim"
+						placeholder="hh:mm" />
+				</div>
+				<div class="form-group col-md-2">
+					<label for="turno">Turno</label> <select id="turno" name="turno"
+						th:field="*{turno}" class="form-control">
+						<option value=""></option>
+						<option value="Manhã">Manhã</option>
+						<option value="Tarde">Tarde</option>
+						<option value="Noite">Noite</option>
+					</select>
+				</div>
+
+				<div class="form-group  col-md-2">
+					<label for="usuario">Usuário</label> <input class="form-control"
+						type="text" th:field="*{usuario}" id="usuario" name="usuario" />
+				</div>
+
+			</div>
+			<div class="row">
+				<div class="form-group col-md-2">
+					<label for="codigo">Código</label> <input class="form-control"
+						type="text" th:field="*{codigo}" id="codigo" name="codigo"
+						placeholder="Código" />
+				</div>
+				<div class="form-group col-md-2">
+					<label for="setor">Setor</label> <select class="form-control"
+						id="setor" th:field="*{setor}" name="setor">
+						<option value=""></option>
+						<option value="FC1">FC1</option>
+						<option value="FC2">FC2</option>
+						<option value="TJRS">TJRS</option>
+						<option value="Palácio">Palácio</option>
+						<option value="Tristeza">Tristeza</option>
+						<option value="Restinga">Restinga</option>
+						<option value="4º Distrito">4º Distrito</option>
+						<option value="Alto Petropolis">Alto Petropolis</option>
+						<option value="Partenon">Partenon</option>
+					</select>
+				</div>
+
+				<div class="form-group col-md-2">
+					<label for="registroinicio">1º Registro</label> <input
+						class="form-control" type="text" th:field="*{registroinicio}"
+						id="registroinicio" name="registroinicio" placeholder="dd/mm/yyyy" />
+				</div>
+				<div class="form-group col-md-2">
+					<label for="registrofim">2º Registro</label> <input
+						class="form-control" type="text" th:field="*{registrofim}"
+						id="registrofim" name="registrofim" placeholder="dd/mm/yyyy" />
+				</div>
+				<div class="form-group col-md-2">
+					<button type="submit" class="btn btn-primary" id="botao">Consultar</button>
+				</div>
+			</div>
+		</form>
+
+
+		<h4>Resultado</h4>
+
+		<div id="total">
+			Total:<span
+				th:text="|${lista.getNumberOfElements()} de ${lista.getTotalElements()}|"></span>
 		</div>
-		<div class="pure-u-3-4" id="center">
-			<form class="pure-form" th:action="@{/ocorrencia/listar}"
-				method="GET" action="/ocorrencia/listar" th:object="${view}"
-				id="formulario">
-
-				<input type="hidden" th:field="*{pagina}" value="1" name="pagina"
-					id="pagina" />
-
-				<fieldset>
-
-						<h4>Consulta</h4>
-
-					<div class="pure-g">
-						<div class="pure-u-1-6">
-							<label for="datainicio">1ª Data</label> <input
-								class="pure-u-23-24" type="text" th:field="*{datainicio}"
-								id="datainicio" name="datainicio" placeholder="dd/mm/yyyy" />
-						</div>
-
-
-						<div class="pure-u-1-6">
-							<label for="datafim">2ª Data</label> <input class="pure-u-23-24"
-								type="text" th:field="*{datafim}" id="datafim" name="datafim"
-								placeholder="dd/mm/yyyy" />
-						</div>
-
-						<div class="pure-u-1-6">
-							<label for="datainicio">1ª Hora</label> <input
-								class="pure-u-23-24" type="text" th:field="*{horainicio}"
-								id="horainicio" name="horainicio" placeholder="hh:mm" />
-						</div>
-						<div class="pure-u-1-6">
-							<label for="horafim">2ª Hora</label> <input class="pure-u-23-24"
-								type="text" th:field="*{horafim}" id="horafim" name="horafim"
-								placeholder="hh:mm" />
-						</div>
-					</div>
-					<div class="pure-g">
-						<div class="pure-u-1-3">
-							<label for="codigo">Código</label> <input class="pure-u-23-24"
-								type="text" th:field="*{codigo}" id="codigo" name="codigo"
-								placeholder="Código" />
-						</div>
-						<div class="pure-u-1-6">
-							<label for="turno">Turno</label> <select id="turno" name="turno"
-								th:field="*{turno}" class="pure-u-23-24">
-								<option value=""></option>
-								<option value="Manhã">Manhã</option>
-								<option value="Tarde">Tarde</option>
-								<option value="Noite">Noite</option>
-							</select>
-						</div>
-						<div class="pure-u-1-6">
-							<label for="setor">Setor</label> <select class="pure-u-23-24"
-								id="setor" th:field="*{setor}" name="setor">
-								<option value=""></option>
-								<option value="FC1">FC1</option>
-								<option value="FC2">FC2</option>
-								<option value="TJRS">TJRS</option>
-								<option value="Palácio">Palácio</option>
-								<option value="Tristeza">Tristeza</option>
-								<option value="Restinga">Restinga</option>
-								<option value="4º Distrito">4º Distrito</option>
-								<option value="Alto Petropolis">Alto Petropolis</option>
-								<option value="Partenon">Partenon</option>
-							</select>
-						</div>
-					</div>
-					<div class="pure-g">
-						<div class="pure-u-1-6">
-							<label for="usuario">Usuário</label> <input class="pure-u-23-24"
-								type="text" th:field="*{usuario}" id="usuario" name="usuario" />
-						</div>
-
-						<div class="pure-u-1-6">
-							<label for="registroinicio">1º Registro</label> <input
-								class="pure-u-23-24" type="text" th:field="*{registroinicio}"
-								id="registroinicio" name="registroinicio"
-								placeholder="dd/mm/yyyy" />
-						</div>
-						<div class="pure-u-1-6">
-							<label for="registrofim">2º Registro</label> <input
-								class="pure-u-23-24" type="text" th:field="*{registrofim}"
-								id="registrofim" name="registrofim" placeholder="dd/mm/yyyy" />
-						</div>
-						<div class="pure-u-1-6">
-							<button type="submit"
-								class="pure-button pure-button-primary pure-u-23-24" id="botao">Consultar</button>
-						</div>
-					</div>
-				</fieldset>
-			</form>
-
-
-				<h4>Resultado</h4>
-
-			<div id="total">
-				Total:<span
-					th:text="|${lista.getNumberOfElements()} de ${lista.getTotalElements()}|"></span>
-			</div>
-			<table class="pure-table">
+		<table class="table">
+			<thead>
 				<tr>
-					<th>Nº</th>
-					<th>Data</th>
-					<th>Hora</th>
-					<th>Turno</th>
-					<th>Cód</th>
-					<th>Setor</th>
-					<th>Guarda</th>
+					<th scope="col">Nº</th>
+					<th scope="col">Data</th>
+					<th scope="col">Hora</th>
+					<th scope="col">Turno</th>
+					<th scope="col">Cód</th>
+					<th scope="col">Setor</th>
+					<th scope="col">Guarda</th>
 				</tr>
-				<tr th:each="item:${lista}">
+			</thead>
+			<tbody>
+				<tr scope="row" th:each="item:${lista}">
 					<td><a href="/ocorrencia/${item.id}"
 						th:href="@{/ocorrencia/__${item.id}__}"
 						th:text="|${item.numero}/${#dates.format(item.dataRegistro,'yyyy')}|">01/2017</a></td>
@@ -173,45 +152,46 @@
 					<td th:text="${item.setor}">TJRS</td>
 					<td th:text="${item.usuario}">Xavier</td>
 				</tr>
-			</table>
+			</tbody>
+		</table>
 
-			<nav id="nav">
-				<ul class="pagination">
 
-					<li th:if="${page.getPageNumber()-1}>=2"
-						th:onclick="'addPagina(\'1\')'">1</li>
+		<nav id="nav">
+			<ul class="pagination">
 
-					<li th:if="${page.getPageNumber()-1}>=1"
-						th:onclick="'addPagina(\'__${page.getPageNumber()-1}__\')'">
-						<span th:text="${page.getPageNumber()-1}">1</span>
-					</li>
+				<li class="page-item" th:if="${page.getPageNumber()-1}>=2"
+					th:onclick="'addPagina(\'1\')'">1</li>
 
-					<li th:if="${page.getPageNumber()}>=1"
-						th:onclick="'addPagina(\'__${page.getPageNumber()}__\')'"><span
-						th:text="${page.getPageNumber()}">2</span></li>
+				<li class="page-item" th:if="${page.getPageNumber()-1}>=1"
+					th:onclick="'addPagina(\'__${page.getPageNumber()-1}__\')'"><span
+					class="page-link" th:text="${page.getPageNumber()-1}">1</span></li>
 
-					<li class="active"><span th:text="${page.getPageNumber()+1}">3</span></li>
+				<li class="page-item" th:if="${page.getPageNumber()}>=1"
+					th:onclick="'addPagina(\'__${page.getPageNumber()}__\')'"><span
+					class="page-link" th:text="${page.getPageNumber()}">2</span></li>
 
-					<li th:if="${lista.getTotalPages() >= page.getPageNumber()+2}"
-						th:onclick="'addPagina(\'__${page.getPageNumber()+2}__\')'"><span
-						th:text="${page.getPageNumber()+2}">4</span></li>
+				<li class="page-item"><span class="page-link"
+					th:text="${page.getPageNumber()+1}">3</span></li>
 
-					<li th:if="${lista.getTotalPages() >= page.getPageNumber()+3}"
-						th:onclick="'addPagina(\'__${page.getPageNumber()+3}__\')'"><span
-						th:text="${page.getPageNumber()+3}">5</span></li>
+				<li class="page-item"
+					th:if="${lista.getTotalPages() >= page.getPageNumber()+2}"
+					th:onclick="'addPagina(\'__${page.getPageNumber()+2}__\')'"><span
+					class="page-link" th:text="${page.getPageNumber()+2}">4</span></li>
 
-					<li th:if="${lista.getTotalPages() >= page.getPageNumber()+4}"
-						th:onclick="'addPagina(\'__${lista.getTotalPages()}__\')'"><span
-						aria-hidden="true" th:text="__${lista.getTotalPages()}__">U</span></li>
-				</ul>
-			</nav>
+				<li class="page-item"
+					th:if="${lista.getTotalPages() >= page.getPageNumber()+3}"
+					th:onclick="'addPagina(\'__${page.getPageNumber()+3}__\')'"><span
+					class="page-link" th:text="${page.getPageNumber()+3}">5</span></li>
 
-		</div>
+				<li class="page-item"
+					th:if="${lista.getTotalPages() >= page.getPageNumber()+4}"
+					th:onclick="'addPagina(\'__${lista.getTotalPages()}__\')'"><span
+					class="page-link" aria-hidden="true"
+					th:text="__${lista.getTotalPages()}__">U</span></li>
+			</ul>
+		</nav>
+
 	</div>
-
-
-
-
 
 
 </body>

@@ -5,61 +5,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <link rel="stylesheet"
-	href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
-	integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" media="all"
-	href="../static/css/menu.css" th:href="@{/css/menu.css}" />
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
 
-<script src="../static/js/javascript.js" th:src="@{/js/javascript.js}"></script>
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
-	th:src="@{/js/jquery-3.2.1.min.js}"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+	crossorigin="anonymous"></script>
+	
+	<title>Usuário</title>
 
-<style type="text/css">
-#regras ul li {
-	padding: 5;
-	list-style-type: none;
-}
-
-.pure-u-1 {
-	padding: 5;
-}
-</style>
-
+<title>Usuário</title>
 </head>
 <body>
-	<div class="pure-g">
-		<div class="pure-u-1-8" id="menu">
-			<div class="pure-u-11-12">
-				<h2>Simples</h2>
+	<div th:replace="fragmentos/menu"></div>
+
+	<div class="container" style="padding:20">
+
+		<h1>Usuário</h1>
+
+		<form method="POST" th:object="${view}" th:action="@{/usuario/salvar}">
+
+			<input type="hidden" id="senha" th:field="*{senha}" /> <input
+				type="hidden" id="id" th:field="*{id}" /> <input type="hidden"
+				id="enabled" th:field="*{enabled}" />
+
+			<div class="form-group">
+				<label for="nome">Nome</label> <input type="text" id="nome"
+					class="form-control" th:field="*{nome}" autofocus="autofocus" />
 			</div>
-			<div th:replace="fragmentos/menu"></div>
-		</div>
-		<div class="pure-u-3-4" style="padding: 20">
-			<h1>Usuário</h1>
-
-			<form class="pure-form" method="POST" th:object="${view}"
-				th:action="@{/usuario/salvar}">
-
-				<input type="hidden" id="senha" th:field="*{senha}" /> <input
-					type="hidden" id="id" th:field="*{id}" /> <input type="hidden"
-					id="enabled" th:field="*{enabled}" />
-
-				<div class="pure-u-1">
-					<label for="nome">Nome</label> <input type="text" id="nome"
-						th:field="*{nome}" autofocus="autofocus" />
-				</div>
-
-				<div class="pure-u-1">
+			<div class="row">
+				<div class="form-group col-sm-6">
 					<label for="login">Login</label> <input type="text" id="login"
-						th:field="*{login}" onblur="checarlogin('#login')" />
+						class="form-control" th:field="*{login}"
+						onblur="checarlogin('#login')" />
 					<div id="result"></div>
 				</div>
-				<div class="pure-u-1">
+				<div class="form-group col-sm-6">
 					<label for="setor">Setor</label> <select id="setor"
-						th:field="*{setor}">
+						class="form-control" th:field="*{setor}">
 						<option value="FC1">FC1</option>
 						<option value="FC2">FC2</option>
 						<option value="TJRS">TJRS</option>
@@ -71,35 +64,39 @@
 						<option value="Partenon">Partenon</option>
 					</select>
 				</div>
+			</div>
+			<div class="form-group">
+				<label for="obs">Observação</label>
+				<textarea id="obs" th:field="*{obs}" class="form-control"></textarea>
+			</div>
 
-				<div class="pure-u-1">
-					<label for="obs">Observação</label>
-					<textarea id="obs" th:field="*{obs}"></textarea>
-				</div>
+			<div class="form-group">
 
-				<div class="pure-u-1">
-					<label for="permissoes">Permissões</label>
-					<div class="pure-u-1" id="regras">
-						<ul>
-							<li><input type="checkbox" th:checked="*{usuario}"
-								name="usuario" id="usuario" /> <label th:for="usuario"
-								th:text="*{textoRegras[0]}">Heating</label></li>
-							<li><input type="checkbox" th:checked="*{adm}" name="adm" />
-								<label th:for="adm" th:text="*{textoRegras[1]}">Heating</label></li>
-							<li><input type="checkbox" th:checked="*{visitante}"
-								name="visitante" /> <label th:for="visitante"
-								th:text="*{textoRegras[2]}">Heating</label></li>
-						</ul>
-					</div>
-				</div>
+					<label class="custom-control custom-checkbox"> <input name="usuario"
+						type="checkbox" class="custom-control-input"
+						th:checked="*{usuario}" /> <span class="custom-control-indicator"></span>
+						<span class="custom-control-description"
+						th:text="*{textoRegras[0]}">Check this custom checkbox</span>
+					</label> <label class="custom-control custom-checkbox"> <input name="adm"
+						type="checkbox" class="custom-control-input" th:checked="*{adm}" />
+						<span class="custom-control-indicator"></span> <span
+						class="custom-control-description" th:text="*{textoRegras[1]}">Check
+							this custom checkbox</span>
+					</label> <label class="custom-control custom-checkbox"> <input name="visitante"
+						type="checkbox" class="custom-control-input"
+						th:checked="*{visitante}" /> <span
+						class="custom-control-indicator"></span> <span
+						class="custom-control-description" th:text="*{textoRegras[2]}">Check
+							this custom checkbox</span>
+					</label>
+			</div>
 
 
-				<div class="pure-u-1">
-					<button type="submit" class="pure-button" id="salvar">Salvar</button>
-				</div>
-			</form>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" id="salvar">Salvar</button>
+			</div>
+		</form>
 
-		</div>
 	</div>
 
 </body>

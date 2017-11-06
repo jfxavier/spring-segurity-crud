@@ -5,34 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <link rel="stylesheet"
-	href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
-	integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" media="all"
-	href="../static/css/menu.css" th:href="@{/css/menu.css}" />
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
 
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
-	th:src="@{/js/jquery-3.2.1.min.js}"></script>
-
-
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+	crossorigin="anonymous"></script>
+	
+	<title>Usuário</title>
 </head>
 <body>
-	<div class="pure-g">
-		<div class="pure-u-1-8" id="menu">
-			<div class="pure-u-11-12">
-				<h2>Simples</h2>
-			</div>
 			<div th:replace="fragmentos/menu"></div>
-		</div>
-		<div class="pure-u-3-4" style="padding:20">
+
+		<div class="container" style="padding:20">
 			<h4>Excluir?</h4>
 			Confirma a exclusão do usuário <p th:text="${usuario.login}"></p>.
-			<a th:href="@{/usuario/delete/__${usuario.id}__}">Sim</a>
-			<a th:href="@{/usuario/lista}">Não</a>
+			<a th:href="@{/usuario/delete/__${usuario.id}__}" class="btn btn-danger">Sim</a>
+			<a th:href="@{/usuario/lista}" class="btn btn-primary">Não</a>
 		</div>
-	</div>
 
 <!-- spring.datasource.url =jdbc:mysql://node146516-server.jelasticlw.com.br/seg
 spring.datasource.username = seg

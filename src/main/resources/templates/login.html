@@ -4,75 +4,45 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<link rel="stylesheet"
-	href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
-	integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
-	crossorigin="anonymous" />
-
 <link rel="stylesheet" type="text/css" media="all"
-	href="../static/css/menu.css" th:href="@{/css/menu.css}" />
-
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
-	th:src="@{/js/jquery-3.2.1.min.js}"></script>
+	href="../static/css/style.css" th:href="@{/css/style.css}" />
 
 <style type="text/css">
-.msg {
-	margin: 10;
-	padding: 10;
-	width:200;
-	border-radius: 3px;
-}
-
-.alerta {
-	border: 1px solid #900;
-	background-color: #fdd;
-}
-
-.ok {
-	border: 1px solid #090;
-	background-color: #dfd;
+body {
+	background-image: url(../images/login.jpg);
+	background-size: cover;
 }
 </style>
 
+<title>SimplesSys</title>
 </head>
 <body>
-	<div class="pure-g">
-		<div class="pure-u-1-8" id="menu">
-			<div class="pure-u-11-12">
-				<h2>Simples</h2>
-			</div>
-			<div class="vertical-menu"></div>
-		</div>
-		<div class="pure-u-3-4" style="padding: 20">
-			<h1>Login</h1>
-			<h2>Simples - Sistema de Ocorrências para a Guarda</h2>
-			<form th:action="@{/login}" method="post"
-				class="pure-form pure-form-aligned">
-				<fieldset>
-					<div class="pure-controls">
-						<div th:if="${param.error}" class="msg alerta">Login ou usuário
-							é invalido.</div>
-						<div th:if="${param.logout}" class="msg ok">Você saiu
-							com sucesso.</div>
-					</div>
-					<div class="pure-control-group">
-						<label for="username">Usuário: </label> <input type="text"
-							id="username" name="username" placeholder="Usuário"
-							autofocus="autofocus" required="required" />
-					</div>
-					<div class="pure-control-group">
-						<label for="password">Senha: </label> <input type="password"
-							id="password" name="password" placeholder="Senha" />
-					</div>
-					<div class="pure-controls">
-						<button type="submit" class="pure-button pure-button-primary"
-							id="botao">Entrar</button>
-					</div>
-				</fieldset>
-			</form>
+
+<div class="header">
+<div>
+Simples<span>Sys</span>
+</div>
+</div>
+	
+		<form th:action="@{/login}" method="post">
+		<div class="login">
+			<div th:if="${param.error}" class="msg alerta">Login ou usuário
+				é invalido.</div>
+			<div th:if="${param.logout}" class="msg ok">Você saiu com
+				sucesso.</div>
+
+			<input type="text" id="username" name="username"
+				placeholder="Usuário" autofocus="autofocus" required="required" />
+			<input type="password" id="password" name="password"
+				placeholder="Senha" /> <input type="submit" id="botao"
+				value="Entrar"/>
 
 		</div>
-	</div>
+	</form>
+
+
+
+
+
 </body>
 </html>

@@ -95,31 +95,10 @@ public class ControleOcorrencias {
 			ocorrencia.setUltimaAlteracao(calendar.getTime());
 		}
 
-		System.out.println(ocorrencia);
-		ModelAndView model = new ModelAndView("redirect:ocorrencia/lista");
+		ModelAndView model = new ModelAndView("redirect:lista");
 		ocorrenciaRepository.save(ocorrencia);
-		System.out.println(ocorrencia);
 		return model;
 	}
-
-	/*
-	 * @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET) public
-	 * ModelAndView delete(@PathVariable Integer id) {
-	 * ocorrenciaRepository.delete(id); return lista("Registro excluido com êxito("
-	 * + id + ")."); }
-	 * 
-	 * public ModelAndView lista(String msg) { ModelAndView model = new
-	 * ModelAndView("/ocorrencia/lista"); model.addObject("lista",
-	 * ocorrenciaRepository.findAll()); model.addObject("msg", msg); return model; }
-	 * 
-	 * @RequestMapping(value = "/rel/{id}", method = RequestMethod.GET) public
-	 * ModelAndView relatorio(@PathVariable Integer id) { Ocorrencia ocorrencia =
-	 * ocorrenciaRepository.findOne(id); if (ocorrencia.getId() == null) { return
-	 * lista("Ocorrencia não localizada."); } ModelAndView model = new
-	 * ModelAndView("/ocorrencia/relatorio"); model.addObject("ocorrencia",
-	 * ocorrencia); model.addObject("comp", ocorrencia.getNumeroAno()); return
-	 * model; }
-	 */
 
 	public Pageable move(Pageable page, int s) {
 		s--;

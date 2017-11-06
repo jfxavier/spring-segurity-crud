@@ -1,157 +1,167 @@
-
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <link rel="stylesheet"
-	href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
-	integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous" />
 
-<link rel="stylesheet" type="text/css" media="all"
-	href="../static/css/menu.css" th:href="@{/css/menu.css}" />
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
 
 <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"
-	th:src="@{/js/jquery-3.2.1.min.js}"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+	crossorigin="anonymous"></script>
+
 
 <style type="text/css">
-#numero {
-	color: black;
-	background-color: transparent;
-	border: 0px solid;
-	outline: none;
-	box-shadow: none;
+.container {
+	padding: 20 !important;
+	margin: 0 !important;
 }
 
-#usuario {
-	color: black;
-	background-color: transparent;
-}
-
-#dataRegistro {
-	color: black;
-	background-color: transparent;
-}
-
-#ultimaAlteracao {
-	color: black;
-	background-color: transparent;
-}
-
-#usuarioAlteracao {
-	color: black;
-	background-color: transparent;
+.row {
+	padding: 0 !important;
+	margin: 5 !important;
 }
 </style>
 
-<title>Lista de Ocorrências</title>
+<title>Ocorrências</title>
 </head>
 <body>
 
-	<div class="pure-g">
-		<div class="pure-u-1-8" id="menu">
-			<div class="pure-u-11-12">
-				<h2>Simples</h2>
-			</div>
-			<div th:replace="fragmentos/menu"></div>
-		</div>
-		<div class="pure-u-3-4" style="padding: 20">
-			<h4>Cadastro de Ocorrências</h4>
+	<div th:replace="fragmentos/menu"></div>
+	<div class="container">
+		<form th:object="${ocorrenciaView}" th:action="@{/ocorrencia/salvar}"
+			method="POST">
+			<input name="id" id="id" th:field="*{id}" type="hidden" /> <input
+				type="hidden" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" />
 
-			<form class="pure-form pure-g" th:object="${ocorrenciaView}"
-				th:action="@{/ocorrencia/salvar}" method="POST">
-				<input name="id" id="id" th:field="*{id}" type="hidden" /> <input
-					type="hidden" th:name="${_csrf.parameterName}"
-					th:value="${_csrf.token}" />
-				<div class="pure-u-1-3">
-					<div class="pure-u-1">
-						<label for="numero">Número</label> <input class="pure-u-23-24"
-							type="text" th:field="*{numero}" id="numero" readonly="readonly" />
+			<div class="row">
+
+				<div class="col-md-6">
+					<h1>Ocorrências</h1>
+					<div class="form-group row">
+						<label for="numero" class="col-sm-2 col-form-label">Número</label>
+						<div class="col-sm-4">
+							<input class="form-control-plaintext" type="text"
+								th:field="*{numero}" id="numero" readonly="readonly" />
+						</div>
+						<label for="data" class="col-sm-2 col-form-label">Data</label>
+						<div class="col-md-4">
+							<input class="form-control" type="text" th:field="*{data}"
+								id="data" />
+						</div>
 					</div>
-					<div class="pure-u-2-5">
-						<label for="data">Data</label> <input class="pure-u-23-24"
-							type="text" th:field="*{data}" id="data" />
-					</div>
-					<div class="pure-u-1-3">
-						<label for="hora">Horário</label> <input class="pure-u-23-24"
-							type="text" th:field="*{hora}" id="hora" />
-					</div>
-					<div class="pure-u-1">
-						<label for="codigo">Código</label> <input class="pure-u-23-24"
-							type="text" th:field="*{codigo}" id="codigo" />
-					</div>
-					<div class="pure-u-1">
-						<label for="local">Local</label> <input class="pure-u-23-24"
-							type="text" th:field="*{local}" id="local" />
-					</div>
-					<div class="pure-u-2-5">
-						<label for="turno">Turno</label> <select class="pure-u-23-24"
-							id="turno" th:field="*{turno}">
-							<option value="Manhã">Manhã</option>
-							<option value="Tarde">Tarde</option>
-							<option value="Noite">Noite</option>
-						</select>
-					</div>
-					<div class="pure-u-7-12">
-						<label for="setor">Setor</label> <select class="pure-u-23-24"
-							id="setor" th:field="*{setor}">
-							<option value=""></option>
-							<option value="FC1">FC1</option>
-							<option value="FC2">FC2</option>
-							<option value="TJRS">TJRS</option>
-							<option value="Palácio">Palácio</option>
-							<option value="Tristeza">Tristeza</option>
-							<option value="Restinga">Restinga</option>
-							<option value="4º Distrito">4º Distrito</option>
-							<option value="Alto Petropolis">Alto Petropolis</option>
-							<option value="Partenon">Partenon</option>
-						</select>
-					</div>
-					<div class="pure-u-1">
-						<label for="guardas">Guardas</label> <input class="pure-u-23-24"
-							type="text" th:field="*{guardas}" id="guardas" />
+					<div class="form-group row">
+						<label for="hora" class="col-sm-2 col-form-label">Horário</label>
+						<div class="col-sm-4">
+							<input class="form-control" type="text" th:field="*{hora}"
+								id="hora" />
+						</div>
+
+						<label for="turno" class="col-form-label col-sm-2">Turno</label>
+						<div class="col-sm-4">
+							<select class="form-control" id="turno" th:field="*{turno}">
+								<option value="Manhã">Manhã</option>
+								<option value="Tarde">Tarde</option>
+								<option value="Noite">Noite</option>
+							</select>
+						</div>
+
 					</div>
 
-					<div class="pure-u-2-5">
-						<h4>Registro</h4>
-						<label for="dataRegistro">Data</label> <input class="pure-u-23-24"
-							type="text" th:field="*{dataRegistro}" id="dataRegistro"
-							readonly="readonly" /> <label for="usuario">Usuário</label> <input
-							class="pure-u-23-24" type="text" th:field="*{usuario}"
-							id="usuario" readonly="readonly" />
-					</div>
-					<div class="pure-u-2-5">
 
-						<h4>Últ. Alteração</h4>
-						<label for="ultimaAlteracao">Data</label> <input
-							class="pure-u-23-24" type="text" th:field="*{ultimaAlteracao}"
-							id="ultimaAlteracao" readonly="readonly" /> <label
-							for="usuarioAlteracao">Usuário</label> <input
-							class="pure-u-23-24" type="text" th:field="*{usuarioAlteracao}"
-							id="usuarioAlteracao" readonly="readonly" />
+					<div class="form-group row">
+						<label for="local" class="col-form-label col-sm-3">Local</label>
+						<div class="col-sm-9">
+							<input class="form-control" type="text" th:field="*{local}"
+								id="local" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="codigo" class="col-form-label col-sm-3">Código</label>
+						<div class="col-sm-9">
+							<input class="form-control" type="text" th:field="*{codigo}"
+								id="codigo" />
+						</div>
 					</div>
 
+					<div class="form-group row">
+						<label for="setor" class="col-form-label col-sm-3">Setor</label>
+						<div class="col-sm-9">
+							<select class="form-control" id="setor" th:field="*{setor}">
+								<option value=""></option>
+								<option value="FC1">FC1</option>
+								<option value="FC2">FC2</option>
+								<option value="TJRS">TJRS</option>
+								<option value="Palácio">Palácio</option>
+								<option value="Tristeza">Tristeza</option>
+								<option value="Restinga">Restinga</option>
+								<option value="4º Distrito">4º Distrito</option>
+								<option value="Alto Petropolis">Alto Petropolis</option>
+								<option value="Partenon">Partenon</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="guardas" class="col-form-label col-sm-3">Guardas</label>
+						<div class="col-sm-9">
+							<input class="form-control" type="text" th:field="*{guardas}"
+								id="guardas" />
+						</div>
+					</div>
+
+					Registro
+					<div class="form-group row">
+						<label for="dataRegistro" class="col-form-label col-sm-2">Data</label>
+						<div class="col-sm-4">
+							<input class="form-control-plaintext" type="text"
+								th:field="*{dataRegistro}" id="dataRegistro" readonly="readonly" />
+						</div>
+						<label for="usuario" class="col-form-label col-sm-2">Usuário</label>
+						<div class="col-sm-4">
+							<input class="form-control-plaintext" type="text"
+								th:field="*{usuario}" id="usuario" readonly="readonly" />
+						</div>
+					</div>
+
+					Últ. Alteração
+					<div class="form-group row">
+						<label for="ultimaAlteracao" class="col-form-label col-sm-2">Data</label>
+						<div class="col-sm-4">
+							<input class="form-control-plaintext" type="text"
+								th:field="*{ultimaAlteracao}" id="ultimaAlteracao"
+								readonly="readonly" />
+						</div>
+						<label for="usuarioAlteracao" class="col-form-label col-sm-2">Usuário</label>
+						<div class="col-sm-4">
+							<input class="form-control-plaintext" type="text"
+								th:field="*{usuarioAlteracao}" id="usuarioAlteracao"
+								readonly="readonly" />
+						</div>
+					</div>
+					<button class="btn btn-primary" type="submit">Salvar</button>
+					<button type="button" class="btn btn-secondary">Extrato</button>
 				</div>
-				<div class="pure-u-2-3">
-					<textarea class="pure-input-1"
+				<div class="col-md-6">
+					<textarea class="form-control"
 						th:classappend="${#fields.hasErrors('informacao')} ?  'has-error has-feedback'"
-						rows="23" id="informacao" th:field="*{informacao}">Histórico detalhado da ocorrência.</textarea>
-					<button class="pure-button pure-u-1-3"
-						style="padding: 10; margin: 10">Extrato</button>
-					<input class="pure-button pure-u-1-3"
-						style="padding: 10; margin: 10" type="submit" value="Salvar" />
+						rows="20" cols="80" id="informacao" th:field="*{informacao}">Histórico detalhado da ocorrência.</textarea>
+
 				</div>
-
-
-
-			</form>
-
-		</div>
+			</div>
+		</form>
 	</div>
 
 </body>
