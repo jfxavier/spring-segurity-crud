@@ -6,10 +6,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -24,7 +28,7 @@ public class Ocorrencia {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	private Integer id;
-	
+
 	private int numero;
 
 	private String local, usuario, turno, usuarioAlteracao, setor, status;
@@ -46,6 +50,9 @@ public class Ocorrencia {
 	private Date dataRegistro;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date ultimaAlteracao;
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "ocorrencia", orphanRemoval = true)
+	private List<Vinculo> envolvidos;
 
 	public Ocorrencia() {
 		this.id = null;
@@ -195,6 +202,14 @@ public class Ocorrencia {
 		this.status = status;
 	}
 
+	public List<Vinculo> getEnvolvidos() {
+		return envolvidos;
+	}
+
+	public void setEnvolvidos(List<Vinculo> envolvidos) {
+		this.envolvidos = envolvidos;
+	}
+
 	@Override
 	public String toString() {
 		return "Ocorrencia [id=" + id + ", local=" + local + ", usuario=" + usuario + ", turno=" + turno + ", usuarioAlteracao=" + usuarioAlteracao + ", setor=" + setor + ", codigo=" + codigo + ", numero=" + numero + ", informacao="
@@ -231,7 +246,9 @@ public class Ocorrencia {
 		SimpleDateFormat f2 = new SimpleDateFormat("hh:mm");
 
 		this.id = ov.getId();
-		if(ov.getNumero()!=""){this.numero = Integer.getInteger(ov.getNumero().split("/")[0]);}
+		if (ov.getNumero() != "") {
+			this.numero = Integer.getInteger(ov.getNumero().split("/")[0]);
+		}
 		this.local = ov.getLocal();
 		this.turno = ov.getTurno();
 		this.setor = ov.getSetor();
@@ -240,14 +257,19 @@ public class Ocorrencia {
 		this.guardas = ov.getGuardas();
 		this.usuario = ov.getUsuario();
 		this.status = ov.getStatus();
-		if(ov.getData()!="")this.data = f.parse(ov.getData());
-		if(ov.getHora()!="")this.hora = f2.parse(ov.getHora());
-		if(ov.getDataRegistro()!="")this.dataRegistro = f.parse(ov.getDataRegistro());
-		if(ov.getUltimaAlteracao()!="")this.ultimaAlteracao =  f.parse(ov.getUltimaAlteracao());
-		
+		if (ov.getData() != "")
+			this.data = f.parse(ov.getData());
+		if (ov.getHora() != "")
+			this.hora = f2.parse(ov.getHora());
+		if (ov.getDataRegistro() != "")
+			this.dataRegistro = f.parse(ov.getDataRegistro());
+		if (ov.getUltimaAlteracao() != "")
+			this.ultimaAlteracao = f.parse(ov.getUltimaAlteracao());
+
 		this.usuario = ov.getUsuario();
 		this.usuarioAlteracao = ov.getUsuarioAlteracao();
 	}
+
 	public void Set(OcorrenciaView ov) throws ParseException {
 		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat f2 = new SimpleDateFormat("hh:mm");
@@ -261,11 +283,15 @@ public class Ocorrencia {
 		this.guardas = ov.getGuardas();
 		this.usuario = ov.getUsuario();
 		this.status = ov.getStatus();
-		if(ov.getData()!="")this.data = f.parse(ov.getData());
-		if(ov.getHora()!="")this.hora = f2.parse(ov.getHora());
-		if(ov.getDataRegistro()!="")this.dataRegistro = f.parse(ov.getDataRegistro());
-		if(ov.getUltimaAlteracao()!="")this.ultimaAlteracao =  f.parse(ov.getUltimaAlteracao());
-		
+		if (ov.getData() != "")
+			this.data = f.parse(ov.getData());
+		if (ov.getHora() != "")
+			this.hora = f2.parse(ov.getHora());
+		if (ov.getDataRegistro() != "")
+			this.dataRegistro = f.parse(ov.getDataRegistro());
+		if (ov.getUltimaAlteracao() != "")
+			this.ultimaAlteracao = f.parse(ov.getUltimaAlteracao());
+
 		this.usuario = ov.getUsuario();
 		this.usuarioAlteracao = ov.getUsuarioAlteracao();
 	}

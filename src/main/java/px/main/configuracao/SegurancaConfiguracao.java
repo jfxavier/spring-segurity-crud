@@ -31,13 +31,14 @@ public class SegurancaConfiguracao extends WebSecurityConfigurerAdapter {
 		.antMatchers("/usuario/alterarsenha").hasRole("VISITANTE")
 		.antMatchers("/usuario/salvarsenha").hasRole("VISITANTE")
 		.antMatchers("/usuario/**").hasRole("ADM")
-		.antMatchers("/ocorrencia/**").hasRole("USER")  
+		.antMatchers("/ocorrencia/**").hasRole("USER")
+		.antMatchers("/pessoa/**").hasRole("USER")  
 		
 		.antMatchers("/", "/home").permitAll()
 		.antMatchers("/css/**", "/js/**", "/images/**","/templates/**").permitAll()
 		.anyRequest().authenticated()
 		
-		.and().formLogin().loginPage("/login").defaultSuccessUrl("/ocorrencia/lista").permitAll()
+		.and().formLogin().loginPage("/login").defaultSuccessUrl("/usuario/lista").permitAll()
 		.and().exceptionHandling().accessDeniedPage("/403")
 				
 				.and().logout().permitAll();
