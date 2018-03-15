@@ -2,8 +2,7 @@ package px.main.ocorrencia.modelos;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -19,8 +18,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import px.main.ocorrencia.views.OcorrenciaView;
 
 @Entity
 @Table(name = "ocorrencia")
@@ -55,11 +52,11 @@ public class Ocorrencia {
 	private List<Vinculo> envolvidos;
 
 	public Ocorrencia() {
-		this.id = null;
 		Calendar calendar = Calendar.getInstance();
 		this.data = this.dataRegistro = this.ultimaAlteracao = calendar.getTime();
 		this.hora = new Date();
 		this.status = "Ativo";
+		this.envolvidos = new ArrayList<Vinculo>();
 	}
 
 	public Ocorrencia(Integer id, String local, String usuario, String turno, String usuarioAlteracao, String setor, String codigo, int numero, String informacao, String guardas, Date data, Date hora, Date dataRegistro,
@@ -80,6 +77,7 @@ public class Ocorrencia {
 		this.dataRegistro = dataRegistro;
 		this.ultimaAlteracao = ultimaAlteracao;
 		this.status = status;
+		this.envolvidos = new ArrayList<Vinculo>();
 	}
 
 	public Integer getId() {
@@ -210,89 +208,57 @@ public class Ocorrencia {
 		this.envolvidos = envolvidos;
 	}
 
-	@Override
-	public String toString() {
-		return "Ocorrencia [id=" + id + ", local=" + local + ", usuario=" + usuario + ", turno=" + turno + ", usuarioAlteracao=" + usuarioAlteracao + ", setor=" + setor + ", codigo=" + codigo + ", numero=" + numero + ", informacao="
-				+ informacao + ", guardas=" + guardas + ", data=" + data + ", hora=" + hora + ", dataRegistro=" + dataRegistro + ", ultimaAlteracao=" + ultimaAlteracao + ", status=" + status + "]";
-	}
-
-	public OcorrenciaView Get() {
-		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat f2 = new SimpleDateFormat("hh:mm");
-		SimpleDateFormat f3 = new SimpleDateFormat("yyyy");
-
-		OcorrenciaView oV = new OcorrenciaView();
-		oV.setId(this.id);
-		oV.setNumero(this.numero + "/" + f3.format(this.dataRegistro));
-		oV.setLocal(this.local);
-		oV.setUsuario(this.usuario);
-		oV.setTurno(this.turno);
-		oV.setUsuarioAlteracao(this.usuarioAlteracao);
-		oV.setSetor(this.setor);
-		oV.setStatus(this.status);
-		oV.setData(f.format(this.data));
-		oV.setHora(f2.format(this.hora));
-		oV.setDataRegistro(f.format(this.dataRegistro));
-		oV.setUltimaAlteracao(f.format(this.ultimaAlteracao));
-		oV.setCodigo(this.codigo);
-		oV.setInformacao(this.informacao);
-		oV.setGuardas(this.guardas);
-		return oV;
-
-	}
-
-	public Ocorrencia(OcorrenciaView ov) throws ParseException {
-		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat f2 = new SimpleDateFormat("hh:mm");
-
-		this.id = ov.getId();
-		if (ov.getNumero() != "") {
-			this.numero = Integer.getInteger(ov.getNumero().split("/")[0]);
-		}
-		this.local = ov.getLocal();
-		this.turno = ov.getTurno();
-		this.setor = ov.getSetor();
-		this.codigo = ov.getCodigo();
-		this.informacao = ov.getInformacao();
-		this.guardas = ov.getGuardas();
-		this.usuario = ov.getUsuario();
-		this.status = ov.getStatus();
-		if (ov.getData() != "")
-			this.data = f.parse(ov.getData());
-		if (ov.getHora() != "")
-			this.hora = f2.parse(ov.getHora());
-		if (ov.getDataRegistro() != "")
-			this.dataRegistro = f.parse(ov.getDataRegistro());
-		if (ov.getUltimaAlteracao() != "")
-			this.ultimaAlteracao = f.parse(ov.getUltimaAlteracao());
-
-		this.usuario = ov.getUsuario();
-		this.usuarioAlteracao = ov.getUsuarioAlteracao();
-	}
-
-	public void Set(OcorrenciaView ov) throws ParseException {
-		SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat f2 = new SimpleDateFormat("hh:mm");
-
-		this.id = ov.getId();
-		this.local = ov.getLocal();
-		this.turno = ov.getTurno();
-		this.setor = ov.getSetor();
-		this.codigo = ov.getCodigo();
-		this.informacao = ov.getInformacao();
-		this.guardas = ov.getGuardas();
-		this.usuario = ov.getUsuario();
-		this.status = ov.getStatus();
-		if (ov.getData() != "")
-			this.data = f.parse(ov.getData());
-		if (ov.getHora() != "")
-			this.hora = f2.parse(ov.getHora());
-		if (ov.getDataRegistro() != "")
-			this.dataRegistro = f.parse(ov.getDataRegistro());
-		if (ov.getUltimaAlteracao() != "")
-			this.ultimaAlteracao = f.parse(ov.getUltimaAlteracao());
-
-		this.usuario = ov.getUsuario();
-		this.usuarioAlteracao = ov.getUsuarioAlteracao();
-	}
+	/*
+	 * public OcorrenciaView Get() { SimpleDateFormat f = new
+	 * SimpleDateFormat("dd/MM/yyyy"); SimpleDateFormat f2 = new
+	 * SimpleDateFormat("hh:mm"); SimpleDateFormat f3 = new
+	 * SimpleDateFormat("yyyy");
+	 * 
+	 * OcorrenciaView oV = new OcorrenciaView(); oV.setId(this.id);
+	 * oV.setNumero(this.numero + "/" + f3.format(this.dataRegistro));
+	 * oV.setLocal(this.local); oV.setUsuario(this.usuario);
+	 * oV.setTurno(this.turno); oV.setUsuarioAlteracao(this.usuarioAlteracao);
+	 * oV.setSetor(this.setor); oV.setStatus(this.status);
+	 * oV.setData(f.format(this.data)); oV.setHora(f2.format(this.hora));
+	 * oV.setDataRegistro(f.format(this.dataRegistro));
+	 * oV.setUltimaAlteracao(f.format(this.ultimaAlteracao));
+	 * oV.setCodigo(this.codigo); oV.setInformacao(this.informacao);
+	 * oV.setGuardas(this.guardas); return oV;
+	 * 
+	 * }
+	 * 
+	 * public Ocorrencia(OcorrenciaView ov) throws ParseException { SimpleDateFormat
+	 * f = new SimpleDateFormat("dd/MM/yyyy"); SimpleDateFormat f2 = new
+	 * SimpleDateFormat("hh:mm");
+	 * 
+	 * this.id = ov.getId(); if (ov.getNumero() != "") { this.numero =
+	 * Integer.getInteger(ov.getNumero().split("/")[0]); } this.local =
+	 * ov.getLocal(); this.turno = ov.getTurno(); this.setor = ov.getSetor();
+	 * this.codigo = ov.getCodigo(); this.informacao = ov.getInformacao();
+	 * this.guardas = ov.getGuardas(); this.usuario = ov.getUsuario(); this.status =
+	 * ov.getStatus(); if (ov.getData() != "") this.data = f.parse(ov.getData()); if
+	 * (ov.getHora() != "") this.hora = f2.parse(ov.getHora()); if
+	 * (ov.getDataRegistro() != "") this.dataRegistro =
+	 * f.parse(ov.getDataRegistro()); if (ov.getUltimaAlteracao() != "")
+	 * this.ultimaAlteracao = f.parse(ov.getUltimaAlteracao());
+	 * 
+	 * this.usuario = ov.getUsuario(); this.usuarioAlteracao =
+	 * ov.getUsuarioAlteracao(); }
+	 * 
+	 * public void Set(OcorrenciaView ov) throws ParseException { SimpleDateFormat f
+	 * = new SimpleDateFormat("dd/MM/yyyy"); SimpleDateFormat f2 = new
+	 * SimpleDateFormat("hh:mm");
+	 * 
+	 * this.id = ov.getId(); this.local = ov.getLocal(); this.turno = ov.getTurno();
+	 * this.setor = ov.getSetor(); this.codigo = ov.getCodigo(); this.informacao =
+	 * ov.getInformacao(); this.guardas = ov.getGuardas(); this.usuario =
+	 * ov.getUsuario(); this.status = ov.getStatus(); if (ov.getData() != "")
+	 * this.data = f.parse(ov.getData()); if (ov.getHora() != "") this.hora =
+	 * f2.parse(ov.getHora()); if (ov.getDataRegistro() != "") this.dataRegistro =
+	 * f.parse(ov.getDataRegistro()); if (ov.getUltimaAlteracao() != "")
+	 * this.ultimaAlteracao = f.parse(ov.getUltimaAlteracao());
+	 * 
+	 * this.usuario = ov.getUsuario(); this.usuarioAlteracao =
+	 * ov.getUsuarioAlteracao(); }
+	 */
 }

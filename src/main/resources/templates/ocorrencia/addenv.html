@@ -1,0 +1,182 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+	crossorigin="anonymous" />
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+	integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+	crossorigin="anonymous"></script>
+
+
+
+<style type="text/css">
+.container {
+	padding: 20 !important;
+	margin: 0 !important;
+}
+
+.row {
+	padding: 0 !important;
+	margin: 5 !important;
+}
+</style>
+
+<title>Ocorrências</title>
+
+
+<script type="text/javascript">
+	function funcaoJquery() {
+		console.log("==============ajax============");
+		$.get("/ocorrencia/addenv", {
+			parametro1 : "teste"
+		}, function(data) {
+			console.log(data);
+			$("#divRetorno").html(data);
+		});
+	}
+	function funcaoJquery2(nome) {
+		console.log("==============ajax============");
+		$.get("/ocorrencia/addenv", {
+			nome : nome
+		}, function(data) {
+			console.log(data);
+			$("#th" + id).closest("tr").hide;
+			$("#divRetorno").html(data);
+		});
+	}
+	function s(id) {
+		console.log("==============add============");
+		$("#envolvido").val(id);
+		$("#comando").val("add");
+		$("#1form").submit();
+	}
+	function r(id) {
+		console.log("==============del============");
+		$("#envolvido").val(id);
+		$("#comando").val("del");
+		$("#1form").submit();
+	}
+	function b() {
+		console.log("==============bus============");
+		$("#comando").val("bus");
+		$("#1form").submit();
+	}
+</script>
+</head>
+<body>
+
+	<div th:replace="fragmentos/menu"></div>
+	<div class="container">
+		<form th:object="${view}" th:action="@{/ocorrencia/addenv}"
+			method="POST" id="1form">
+
+			<div class="col-md-offset-1 col-md-5">
+				<strong>Número: </strong><span
+					th:text="|*{ocorrencia.numero}/*{#dates.format(ocorrencia.dataRegistro,'yyyy')}|">01/01/2017</span>
+			</div>
+			<div class="col-md-offset-1 col-md-5">
+				<strong>Data: </strong><span
+					th:text="*{#dates.format(ocorrencia.data,'dd/MM/yyyy')}">01/01/2017</span>
+			</div>
+			<div class="col-md-offset-1 col-md-5">
+				<strong>Hora: </strong><span
+					th:text="*{#dates.format(ocorrencia.hora,'HH:mm')}">12:34</span>
+			</div>
+			<div class="col-md-offset-1 col-md-5">
+				<strong>Sala: </strong><span th:text="*{ocorrencia.local}">12</span>
+			</div>
+			<div class="col-md-offset-1 col-md-5">
+				<strong>Código: </strong><span th:text="*{ocorrencia.codigo}">12
+					- Teste de Inclusão</span>
+			</div>
+			<div class="col-md-offset-1 col-md-5">
+				<strong>Turno: </strong><span th:text="*{ocorrencia.turno}">Manhã</span>
+			</div>
+
+			<input type="hidden" th:field="*{ocorrencia.id}" name="ocorrecencia"
+				id="ocorrencia" /> <input type="hidden" th:field="*{pagina}"
+				value="1" name="pagina" id="pagina" /> <input type="hidden"
+				th:field="*{comando}" /> <input type="hidden"
+				th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> <input
+				class="form-control" type="hidden" th:field="*{envolvido}"
+				id="envolvido" />
+
+			<h1>Envolvidos</h1>
+			<div class="form-group row">
+				<p style="font-style: italic;"
+					th:if="*{ocorrencia.envolvidos == null}">Nenhum envolvido
+					adicionado.</p>
+					<table class="table"   th:if="*{!ocorrencia.envolvidos.isEmpty()}">
+						<thead>
+							<tr>
+								<th scope="col">Nome</th>
+								<th scope="col">Participação</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr scope="row" th:each="item:*{ocorrencia.envolvidos}">
+								<td th:text="${item.envolvido.nome}"></td>
+								<td th:text="${item.tipo}"></td>
+								<!-- <td><select class="form-control" id="tipo" th:field="${item.envolvido.id}">
+									<option value=""></option>
+									<option value="Acusado">Acusado</option>
+									<option value="Vítima">Vítima</option>
+									<option value="Informante">Informante</option>
+							</select></td> -->
+								<td>
+									<button class="btn btn-primary" type="button"
+										th:onclick="'r(\'__${item.id}__\')'">Remover</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+
+			</div>
+
+			<div class="form-group row">
+				<div class="col-sm-9">
+					<input class="form-control" type="text" th:field="*{filtro}"
+						id="envolvido" />
+					<button class="btn btn-primary" type="button" th:onclick="'b()'">Pesquisar</button>
+				</div>
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Nome</th>
+						<th scope="col">Add</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr scope="row" th:each="item:${view.lista}">
+						<td th:text="${item.nome}"></td>
+						<td>
+							<button class="btn btn-primary" type="button"
+								th:onclick="'s(\'__${item.id}__\')'">Add</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+		</form>
+	</div>
+
+	<div id="divRetorno"></div>
+
+</body>
+</html>

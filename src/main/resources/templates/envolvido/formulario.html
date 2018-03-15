@@ -28,79 +28,78 @@
 
 	<div th:replace="fragmentos/menu"></div>
 
+	<h2>Cadastro de Pessoa</h2>
+	<div class="container">
+		<form method="POST" th:object="${view}" th:action="@{/pessoa/salvar}">
 
-	<h1>Class Building</h1>
-	<h2>Envolvido</h2>
-	<form method="POST" th:object="${view}"
-		th:action="@{/ocorrencia/envolvido/salvar}">
-		<div class="form-group">
-			<label for="id">id</label> <input type="text" id="id"
-				class="form-control" th:field="*{id}" />
-		</div>
-		<div class="form-group">
-			<label for="rg">rg</label> <input type="text" id="rg"
-				class="form-control" th:field="*{rg}" />
-		</div>
-		<div class="form-group">
-			<label for="cpf">cpf</label> <input type="text" id="cpf"
-				class="form-control" th:field="*{cpf}" />
-		</div>
-		<div class="form-group">
-			<label for="endereco">endereco</label> <input type="text"
-				id="endereco" class="form-control" th:field="*{endereco}" />
-		</div>
-		<div class="form-group">
-			<label for="numero">numero</label> <input type="text" id="numero"
-				class="form-control" th:field="*{numero}" />
-		</div>
-		<div class="form-group">
-			<label for="complemento">complemento</label> <input type="text"
-				id="complemento" class="form-control" th:field="*{complemento}" />
-		</div>
-		<div class="form-group">
-			<label for="cep">cep</label> <input type="text" id="cep"
-				class="form-control" th:field="*{cep}" />
-		</div>
-		<div class="form-group">
-			<label for="bairro">bairro</label> <input type="text" id="bairro"
-				class="form-control" th:field="*{bairro}" />
-		</div>
-		<div class="form-group">
-			<label for="cidadeUF">cidadeUF</label> <input type="text"
-				id="cidadeUF" class="form-control" th:field="*{cidadeUF}" />
-		</div>
-		<div class="form-group">
-			<label for="telefone">telefone</label> <input type="text"
-				id="telefone" class="form-control" th:field="*{telefone}" />
-		</div>
-		<div class="form-group">
-			<label for="celular">celular</label> <input type="text" id="celular"
-				class="form-control" th:field="*{celular}" />
-		</div>
-		<div class="form-group">
-			<label for="email">email</label> <input type="text" id="email"
-				class="form-control" th:field="*{email}" />
-		</div>
-		<div class="form-group">
-			<label for="nome">nome</label> <input type="text" id="nome"
-				class="form-control" th:field="*{nome}" />
-		</div>
-		<div class="form-group">
-			<label for="obs">obs</label> <input type="text" id="obs"
-				class="form-control" th:field="*{obs}" />
-		</div>
-		<div class="form-group">
-			<label for="data">data</label> <input type="text" id="data"
-				class="form-control" th:field="*{data}" />
-		</div>
-		<div class="form-group">
-			<label for="ativo">ativo</label> <input type="text" id="ativo"
-				class="form-control" th:field="*{ativo}" />
-		</div>
+			<input type="hidden" id="id" class="form-control" th:field="*{id}" />
+			<input type="hidden" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" />
 
-		<div class="form-group">
-			<button type="submit" class="btn btn-primary" id="salvar">Salvar</button>
-		</div>
-	</form>
+			<div class="form-group">
+				<label for="nome">Nome</label> <input type="text" id="nome"
+					class="form-control" th:field="*{nome}" />
+			</div>
+			<div class="form-group">
+				<label for="rg">Rg</label> <input type="text" id="rg"
+					class="form-control" th:field="*{rg}" />
+			</div>
+			<div class="form-group">
+				<label for="cpf">Cpf</label> <input type="text" id="cpf"
+					class="form-control" th:field="*{cpf}" />
+			</div>
+			<div class="form-group">
+				<label for="endereco">Endereco</label> <input type="text"
+					id="endereco" class="form-control" th:field="*{endereco}" />
+			</div>
+			<div class="form-group">
+				<label for="numero">Nº</label> <input type="text" id="numero"
+					class="form-control" th:field="*{numero}" />
+			</div>
+			<div class="form-group">
+				<label for="complemento">Compl</label> <input type="text"
+					id="complemento" class="form-control" th:field="*{complemento}" />
+			</div>
+			<div class="form-group">
+				<label for="cep">CEP</label> <input type="text" id="cep"
+					class="form-control" th:field="*{cep}" />
+			</div>
+			<div class="form-group">
+				<label for="bairro">Bairro</label> <input type="text" id="bairro"
+					class="form-control" th:field="*{bairro}" />
+			</div>
+			<div class="form-group">
+				<label for="cidadeUF">Cidade/UF</label> <input type="text"
+					id="cidadeUF" class="form-control" th:field="*{cidadeUF}" />
+			</div>
+			<div class="form-group">
+				<label for="telefone">Telefone</label> <input type="text"
+					id="telefone" class="form-control" th:field="*{telefone}" />
+			</div>
+			<div class="form-group">
+				<label for="celular">Celular</label> <input type="text" id="celular"
+					class="form-control" th:field="*{celular}" />
+			</div>
+			<div class="form-group">
+				<label for="email">Email</label> <input type="text" id="email"
+					class="form-control" th:field="*{email}" />
+			</div>
+			<div class="form-group">
+				<label for="obs">Obs</label> <input type="text" id="obs"
+					class="form-control" th:field="*{obs}" />
+			</div>
+			<div class="form-group">
+						<div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+							<ul>
+								<li th:each="err : ${#fields.detailedErrors()}"
+									th:text="${err.message}"></li>
+							</ul>
+						</div>
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary" id="salvar">Salvar</button>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

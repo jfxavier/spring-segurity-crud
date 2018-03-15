@@ -30,4 +30,13 @@ public class Vinculo {
 	@ManyToOne(fetch=FetchType.EAGER,cascade={CascadeType.MERGE,CascadeType.PERSIST})
 	@JoinColumn(name = "envolvido_id")
 	private Envolvido envolvido;
+	
+	public Vinculo() {
+		
+	}
+	public Vinculo(String tipo, Envolvido envolvido,Ocorrencia ocorrencia) {
+		this.tipo=tipo;
+		this.envolvido=envolvido;
+		this.ocorrencia=ocorrencia;
+	}
 }
