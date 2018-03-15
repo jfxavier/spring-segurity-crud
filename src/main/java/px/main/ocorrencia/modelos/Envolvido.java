@@ -2,6 +2,7 @@ package px.main.ocorrencia.modelos;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -41,6 +42,7 @@ public class Envolvido {
 	private List<Vinculo> ocorrencias;
 
 	public Envolvido() {
+		this.ocorrencias = new ArrayList<Vinculo>();
 	}
 
 	public Envolvido(Envolvido env) {
